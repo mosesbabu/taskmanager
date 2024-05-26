@@ -16,20 +16,26 @@ app.use(bodyParser.json());
 
 app.use(express.json());
 
-const twilioClient = twilio('AC1a3cb4f93068f67e3758e4f1029f6123ID', '9e4d5cae9f847cdf8909bb27fbdee462');
+const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN);
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'mosesarara@gmail.com',
-    pass: ''
+    user: 'process.env.EMAIL_USER',
+    pass: 'process.env.EMAIL_PASS'
   }
 });
 
 const dbConfig = {
-  user: 'moses' ,
-  password: 'software112',
+  user: 'process.env.DB_USER' ,
+  password: 'process.env.DB_PASS',
   server: 'localhost',
-  database: 'taskmanager',
+  database: 'process.env.DB_NAME',
+    options: {
+    encrypt: true, 
+    trustServerCertificate: true,
+    enableArithAbort: true,
+    
+  }
 };
 
 const poolPromise = new sql.ConnectionPool(dbConfig)
@@ -90,7 +96,7 @@ app.post('/api/issues', authMiddleware, async (req, res) => {
     // Send SMS
     await twilioClient.messages.create({
       body: `Your issue has been submitted. Tracking ID: ${trackingId}. Assigned to: ${assignee}.`,
-      from: '+14146629769',
+      from: 'process.env.TWILIO_PHONE_NUMBER',
       to: phoneNumber
     });
 
