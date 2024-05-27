@@ -40,7 +40,6 @@ const IssueForm = () => {
 
       console.log('Response:', response);
 
-      console.log('Response:', response);
 
       // Reset form fields after successful submission
       setComplainant('');
