@@ -46,7 +46,7 @@ const poolPromise = new sql.ConnectionPool(dbConfig)
   })
   .catch(err => console.log('Database Connection Failed! Bad Config: ', err));
 
-
+/*
 const authMiddleware = (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) return res.status(401).send({ error: 'Unauthorized' });
@@ -68,8 +68,8 @@ app.post('/api/login', async (req, res) => {
     res.status(401).send({ error: 'Invalid email or password' });
   }
 });
-
-app.post('/api/issues', authMiddleware, async (req, res) => {
+*/
+app.post('/api/issues', async (req, res) => {
   const { complainant, category, description, phoneNumber, assignee } = req.body;
   const trackingId = Math.floor(100000 + Math.random() * 900000); // generate a 6-digit tracking ID
 
@@ -106,7 +106,7 @@ app.post('/api/issues', authMiddleware, async (req, res) => {
   }
 });
 
-app.get('/api/issues', authMiddleware, async (req, res) => {
+app.get('/api/issues',  async (req, res) => {
   try {
     const pool = await poolPromise;
     const result = await pool.request().query('SELECT * FROM Issues');
@@ -116,7 +116,7 @@ app.get('/api/issues', authMiddleware, async (req, res) => {
   }
 });
 
-app.patch('/api/issues/:id', authMiddleware, async (req, res) => {
+app.patch('/api/issues/:id',  async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
