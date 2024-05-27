@@ -26,10 +26,9 @@ const IssueForm = () => {
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
+    //const token = localStorage.getItem('token');
 
-    if (!token) {
-      setError('Unauthorized. Please log in first.');
+  
       return;
     }
 
