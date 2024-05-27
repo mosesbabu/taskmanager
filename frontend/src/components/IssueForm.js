@@ -26,12 +26,7 @@ const IssueForm = () => {
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //const token = localStorage.getItem('token');
-
-  
-      return;
-    }
-
+    
     try {
       console.log('Submitting issue:', { complainant, category, description, phoneNumber, assignee });
 
@@ -41,11 +36,9 @@ const IssueForm = () => {
         description,
         phoneNumber,
         assignee
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
       });
+
+      console.log('Response:', response);
 
       console.log('Response:', response);
 
