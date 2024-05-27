@@ -63,7 +63,7 @@ const IssueForm = () => {
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Complainant</label>
+          <label className="block text-sm font-medium text-gray-700">Complainant email</label>
           <input
             type="email"
             value={complainant}
